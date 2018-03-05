@@ -6,13 +6,9 @@ import java.io.FileOutputStream;
 import java.io.PrintWriter;
 import java.util.Scanner;
 
-/**
- * Есть два файла с отсортированными последовательностями чисел
- * Необходимо слить числа из обоих файлов в третий так, чтобы
- * числа тоже были отсортированы
- */
 public class Main {
-    public static void main(String[] args) throws FileNotFoundException {
+
+    public static void main(String[] args)  throws FileNotFoundException {
         Scanner sc1 = new Scanner(new FileInputStream("file1.txt"));
         Scanner sc2 = new Scanner(new FileInputStream("file2.txt"));
         PrintWriter pw = new PrintWriter(new FileOutputStream("output.txt"));
@@ -35,15 +31,16 @@ public class Main {
         }
         //todo пока в file2 есть числа, выводить их в output
         //todo пока в file1 есть числа, выводить их в output
-        while (sc2.hasNextInt()) {
-            pw.println(a2);
-            a2 = sc2.nextInt();
-        }
         while (sc1.hasNextInt()) {
             pw.println(a1);
             a1 = sc1.nextInt();
         }
+        while (sc2.hasNextInt()){
+            pw.println(a2);
+            a2 = sc2.nextInt();
+        }
         pw.close();
     }
-
 }
+
+
