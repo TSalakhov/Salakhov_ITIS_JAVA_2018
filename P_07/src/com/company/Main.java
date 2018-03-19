@@ -18,6 +18,7 @@ public class Main {
         prs[1] = p1;
 
         Product[] products = load(FILENAME);
+        printProducts(  );
         getById(3);
         getMostExpensiveProduct();
     }
