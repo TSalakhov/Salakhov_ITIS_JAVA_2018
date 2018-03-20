@@ -4,7 +4,6 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.PrintWriter;
-import java.net.ProxySelector;
 import java.util.Scanner;
 
 public class Main {
@@ -18,7 +17,7 @@ public class Main {
         prs[1] = p1;
 
         Product[] products = load(FILENAME);
-        printProducts(  );
+        printProducts( products );
         getById(3);
         getMostExpensiveProduct();
     }
@@ -30,12 +29,11 @@ public class Main {
      */
     static void printProducts(Product[] products) throws FileNotFoundException {
         Scanner sc = new Scanner(new FileInputStream("products.txt"));
-        Scanner sc2 = new Scanner(System.in);
+        System.out.println("Информация о продуктах:");
         while (sc.hasNextLine()) {
-            String s = sc2.nextLine();
+            String s = sc.nextLine();
             String[] elements = s.split(", ");
-            System.out.println(elements[0] + elements[1] + elements[2] + elements[3]);
-
+            System.out.println(elements[0] +", " + elements[1] +", " + elements[2] + ", " + elements[3]);
         }
     }
 
@@ -46,8 +44,8 @@ public class Main {
      */
     static Product getById(int id) throws FileNotFoundException {
         Product[] products = load(FILENAME);
+        System.out.println("Нужный вам продукт:");
         Scanner sc = new Scanner(new FileInputStream("products.txt"));
-        Scanner sc2 = new Scanner(System.in);
         while (sc.hasNextLine()) {
             String s = sc.nextLine();
             String[] elements = s.split(", ");
@@ -80,6 +78,7 @@ public class Main {
                 String s2 = sc2.nextLine();
                 String[] elements2 = s2.split(", ");
                 if (Integer.parseInt(elements2[2]) == max){
+                    System.out.println("Самый дорогой продукт:");
                     System.out.println(elements2[0] +", " + elements2[1] + ", " + elements2[2] + ", " + elements2[3]);
                 }
             }
