@@ -33,7 +33,7 @@ public class Main {
         while (sc.hasNextLine()) {
             String s = sc.nextLine();
             String[] elements = s.split(", ");
-            System.out.println(elements[0] +", " + elements[1] +", " + elements[2] + ", " + elements[3]);
+            System.out.println( "id :" + elements[0] + ", " +"Название :" + elements[1] +", " +"Цена :" + elements[2] + ", " + "Количество :" + elements[3]);
         }
     }
 
