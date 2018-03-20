@@ -15,7 +15,6 @@ public class Main {
         Product[] prs = new Product[2];
         prs[0] = p;
         prs[1] = p1;
-
         Product[] products = load(FILENAME);
         printProducts(products);
         getById(3);
@@ -28,13 +27,11 @@ public class Main {
      * @param products продукты, которые будут распечатаны
      */
     static void printProducts(Product[] products) throws FileNotFoundException {
-        Scanner sc = new Scanner(new FileInputStream("products.txt"));
         System.out.println("Информация о продуктах:");
         int i = 0;
-        while (sc.hasNextLine()) {
-            String s = sc.nextLine();
+        while (i<=4) {
             i++;
-            System.out.println(products[i - 1].id + ", " + products[i - 1].name + ", " + products[i - 1].price + ", " + products[i - 1].count);
+            System.out.println(products[i -1].id + ", " + products[i - 1].name + ", " + products[i - 1].price + ", " + products[i - 1].count);
         }
     }
 
@@ -46,10 +43,8 @@ public class Main {
     static Product getById(int id) throws FileNotFoundException {
         Product[] products = load(FILENAME);
         System.out.println("Нужный вам продукт:");
-        Scanner sc = new Scanner(new FileInputStream("products.txt"));
         int i = 0;
-        while (sc.hasNextLine()) {
-            String s = sc.nextLine();
+        while (i<=4 ) {
             if (products[i].id == id) {
                 System.out.println(products[i].id + ", " + products[i].name + ", " + products[i].price + ", " + products[i].count);
             }
@@ -66,26 +61,24 @@ public class Main {
      */
     static Product getMostExpensiveProduct() throws FileNotFoundException {
         Product[] products = load(FILENAME);
-        Scanner sc = new Scanner(new FileInputStream("products.txt"));
-        Scanner sc2 = new Scanner(new FileInputStream("products.txt"));
         int i = 0;
         int max = 0;
-        while (sc.hasNextLine()) {
-            String s = sc.nextLine();
+        while (i<= 4 ) {
             if (products[i].price > max  ) {
                  max = products[i].price;
             }
             i++;
 
         }
+         i  = 0;
         int m = 0;
-        while(sc2.hasNextLine()){
-            String s2 = sc2.nextLine();
+        while(i < 5 ){
             if (products[m].price == max) {
                 System.out.println("Самый дорогой продукт:");
                 System.out.println(products[m].id + ", " + products[m].name + ", " + products[m].price + ", " + products[m].count);
             }
             m++;
+            i++;
         }
         return null;
     }
