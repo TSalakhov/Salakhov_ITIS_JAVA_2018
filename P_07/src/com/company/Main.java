@@ -17,8 +17,13 @@ public class Main {
         prs[1] = p1;
         Product[] products = load(FILENAME);
         printProducts(products);
-        getById(3);
-        getMostExpensiveProduct();
+        Product product = getById(4);
+        System.out.println("id : " + product.id + ", " + "название : " + product.name + ", " + "цена : " + product.price + ", " + "количество :" + product.count);
+        Product product1 = getMostExpensiveProduct();
+        System.out.println("id : " + product1.id + ", " + "название : " + product1.name + ", " + "цена : " + product1.price + ", " + "количество :" + product1.count);
+        sortByPrice(products);
+        printProducts(products);
+
     }
 
     /**
@@ -28,12 +33,12 @@ public class Main {
      */
     static void printProducts(Product[] products) throws FileNotFoundException {
         System.out.println("Информация о продуктах:");
-        int i = 0;
-        while (i<=4) {
-            i++;
-            System.out.println(products[i -1].id + ", " + products[i - 1].name + ", " + products[i - 1].price + ", " + products[i - 1].count);
+        for (int i = 0; i < products.length; i++) {
+            System.out.println("id : " + products[i].id + ", " + "название : " + products[i].name + ", " + "цена : " + products[i].price + ", " + "количество" + products[i].count);
+
         }
     }
+
 
     /**
      * Возвращает Product по его id
@@ -44,9 +49,9 @@ public class Main {
         Product[] products = load(FILENAME);
         System.out.println("Нужный вам продукт:");
         int i = 0;
-        while (i<=4 ) {
+        while (i <= 4) {
             if (products[i].id == id) {
-                System.out.println(products[i].id + ", " + products[i].name + ", " + products[i].price + ", " + products[i].count);
+                return products[i];
             }
             i++;
         }
@@ -63,24 +68,41 @@ public class Main {
         Product[] products = load(FILENAME);
         int i = 0;
         int max = 0;
-        while (i<= 4 ) {
-            if (products[i].price > max  ) {
-                 max = products[i].price;
+        while (i < products.length) {
+            if (products[i].price > max) {
+                max = products[i].price;
             }
             i++;
 
         }
-         i  = 0;
+        i = 0;
         int m = 0;
-        while(i < 5 ){
+        while (i < products.length) {
             if (products[m].price == max) {
                 System.out.println("Самый дорогой продукт:");
-                System.out.println(products[m].id + ", " + products[m].name + ", " + products[m].price + ", " + products[m].count);
+                return products[m];
             }
             m++;
             i++;
         }
         return null;
+    }
+
+    static void sortByPrice(Product[] products) {
+        for (int i = 0; i < products.length - 1; i++) {
+            for (int j = 0; j < products.length - 1; j++) {
+                if (products[j].price > products[j + 1].price) {
+                    //перестановка
+                    Product[] products2 = new Product[products.length];
+                    products2[j] = products[j];
+                    products[j] = products[j + 1];
+                    products[j + 1] = products2[j];
+
+
+                }
+
+            }
+        }
     }
 
 
