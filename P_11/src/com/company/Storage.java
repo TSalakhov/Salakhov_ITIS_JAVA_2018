@@ -57,6 +57,8 @@ public class Storage {
     ArrayList<Product> sortByPrice() throws SQLException {
         Statement statement = connection.createStatement();
         ResultSet rs = statement.executeQuery("SELECT * FROM products ORDER BY price");
+        String sqlQuery = "SELECT * FROM products ORDER BY price";
+        System.out.println(sqlQuery);
         ArrayList<Product> list = new ArrayList<Product>();
         int i = 0;
         while (rs.next()) {
@@ -72,7 +74,21 @@ public class Storage {
     }
 
     Product getMostExpensiveProduct() throws SQLException {
+        Statement statement = connection.createStatement();
+        ResultSet rs = statement.executeQuery("SELECT * FROM products ");
+        String sqlQuery = "SELECT * FROM products ";
+        System.out.println(sqlQuery);
         ArrayList<Product> list = (ArrayList<Product>) getAllProducts();
+        int j = 0;
+        while (rs.next()) {
+            int id = rs.getInt("id");
+            String name = rs.getString("name");
+            int price = rs.getInt("price");
+            int count = rs.getInt("count");
+            Product p = new Product(id, name, price, count);
+            list.add(j, p);
+            j++;
+        }
         Product productWithMaxPrice = list.get(0);
         for (int i = 1; i < list.size(); i++) {
             if (list.get(i).price > productWithMaxPrice.price) {

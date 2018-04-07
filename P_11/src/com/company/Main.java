@@ -9,9 +9,9 @@ public class Main {
     public static void main(String[] args) throws ClassNotFoundException, SQLException {
         Storage storage = new Storage();
         storage.getAllProducts();
-storage.sortByPrice();
-storage.getMostExpensiveProduct();
-storage.getById(2);
+        storage.sortByPrice();
+        storage.getMostExpensiveProduct();
+        storage.getById(2);
     }
 
     static void printProducts(List<Product> list) {
