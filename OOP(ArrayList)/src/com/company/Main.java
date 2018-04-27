@@ -19,8 +19,7 @@ public class Main {
         ArrayList<Product> list3 = new ArrayList<Product>();
         list3.add(getMostExpensiveProduct());
         System.out.println(list3.get(0).id + ", " + list3.get(0).name + ", " + list3.get(0).price + ", " + list3.get(0).count);
-        sortByPrice(list);
-        printProducts(list);
+
     }
 
 
