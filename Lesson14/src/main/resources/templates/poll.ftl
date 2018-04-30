@@ -5,10 +5,11 @@
 </head>
 <body>
     ${poll.id}. ${poll.title}
-    <ul>
-    <#list poll.answers as answer>
-        <li>${answer.text}</li>
-    </#list>
-    </ul>
+    <form action="/vote" method="POST">
+        <#list poll.answers as answer>
+            <input type="radio" name="answer" value="${answer.id}">${answer.text}<br>
+        </#list>
+        <input type="submit" value="Проголосовать">
+    </form>
 </body>
 </html>

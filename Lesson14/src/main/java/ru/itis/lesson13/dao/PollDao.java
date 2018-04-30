@@ -7,4 +7,5 @@ import java.util.List;
 public interface PollDao {
     Poll findById(Long id);
     List<Poll> findAll();
+    Poll addNewPoll (String title);
 }

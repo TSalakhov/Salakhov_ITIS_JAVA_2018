@@ -1,6 +1,8 @@
 package ru.itis.lesson13.model;
 
-public class Answer {
+import java.util.List;
+
+public class Answer  {
     private Long id;
     private String text;
     private Integer votesCount;

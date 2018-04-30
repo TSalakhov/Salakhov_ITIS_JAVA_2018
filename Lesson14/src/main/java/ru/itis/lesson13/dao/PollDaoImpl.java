@@ -33,4 +33,12 @@ public class PollDaoImpl implements PollDao {
         List<Poll> polls = jdbcTemplate.query(sqlQuery, pollRowMapper);
         return polls;
     }
+
+    @Override
+    public Poll addNewPoll(String title) {
+        String sqlQuery = "INSERT INTO poll (title) VALUES (?)";
+        Object [] args = {title};
+        jdbcTemplate.update(sqlQuery, args);
+        return null;
+    }
 }
