@@ -3,7 +3,7 @@
     <meta charset="UTF-8">
     <title>Все голосования</title>
 </head>
-<body>
+<body style= "background-image: url(https://wallpapershome.ru/images/pages/pic_h/15945.png)">
     ${poll.id}. ${poll.title}
     <form action="/vote" method="POST">
         <#list poll.answers as answer>

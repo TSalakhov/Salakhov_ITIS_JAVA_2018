@@ -5,7 +5,7 @@
     </head>
     <body style= "background-image: url(https://wallpapershome.ru/images/pages/pic_h/15945.png)">
     <h1>Список ответов для  голосований</h1>
-    <h1>||</h2>                    
+    <h1>||</h2>
 <h2>    ||    </h2>
  <h2>   ||    </h2>
     <h2>\/ </h2>
