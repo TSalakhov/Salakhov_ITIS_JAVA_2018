@@ -1,4 +1,8 @@
 package ru.itis.project.dao;
 
-public class TagDaoImpl {
+
+import org.springframework.stereotype.Component;
+
+@Component
+public class TagDaoImpl implements  TagDao {
 }

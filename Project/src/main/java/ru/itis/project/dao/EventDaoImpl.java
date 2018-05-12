@@ -1,4 +1,7 @@
 package ru.itis.project.dao;
 
-public class EventDaoImpl {
+import org.springframework.stereotype.Component;
+
+@Component
+public class EventDaoImpl implements  EventDao {
 }

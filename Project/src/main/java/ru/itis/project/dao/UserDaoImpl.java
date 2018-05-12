@@ -1,4 +1,8 @@
 package ru.itis.project.dao;
 
-public class UserDaoImpl {
+
+import org.springframework.stereotype.Component;
+
+@Component
+public class UserDaoImpl implements  UserDao {
 }
