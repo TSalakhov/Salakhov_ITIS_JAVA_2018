@@ -27,7 +27,7 @@ String getAnserCreateForm(){
 
 @PostMapping("/createanswer")
 String createAnswer(@RequestParam String text,Long poll_id){
-    System.out.println("User wants to create a new answer with title = " + text + " " + poll_id);
+    System.out.println("User wants to create a new answer with title = " + text + poll_id);
      answerDao.addNewAnswer(text,poll_id);
     return "redirect:/createanswer";
 }

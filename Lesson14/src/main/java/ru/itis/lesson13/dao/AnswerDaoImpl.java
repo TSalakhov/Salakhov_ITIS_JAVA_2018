@@ -16,11 +16,6 @@ public class AnswerDaoImpl implements AnswerDao {
     JdbcTemplate jdbcTemplate;
 
 
-
-
-
-
-
     @Override
     public List<Answer> getAllByPollId(Long pollId) {
         String sqlQuery = "SELECT * FROM answer WHERE poll_id = ? ORDER BY id";
@@ -33,7 +28,7 @@ public class AnswerDaoImpl implements AnswerDao {
     public Answer findById(Long id) {
         String sqlQuery = "SELECT * FROM answer WHERE id = ?";
         Object[] arr = {id};
-        return jdbcTemplate.queryForObject(sqlQuery, arr, new AnswerRowMapper());
+        return jdbcTemplate.queryForObject(sqlQuery, arr,Answer.class);
     }
 
     @Override
@@ -41,7 +36,7 @@ public class AnswerDaoImpl implements AnswerDao {
         String sqlQuery = "UPDATE answer " +
                 "SET text = ?, votes_count = ? " +
                 "WHERE id = ?";
-        Object[] args = {answer.getText(),  answer.getVotesCount(), answer.getId()};
+        Object[] args = {answer.getText(), answer.getVotesCount(), answer.getId()};
         jdbcTemplate.update(sqlQuery, args);
         return findById(answer.getId());
     }
@@ -49,15 +44,15 @@ public class AnswerDaoImpl implements AnswerDao {
     @Override
     public Answer addNewAnswer(String text, Long poll_id) {
         String sqlQuery = "INSERT INTO answer (text, poll_id, votes_count) VALUES (?, ?, 0)";
-        Object [] args = {text, poll_id};
-        jdbcTemplate.update(sqlQuery,args);
-        return null;
+        Object[] args = {text, poll_id};
+        jdbcTemplate.update(sqlQuery, args);
+        return  null;
     }
 
     @Override
     public List<Answer> ShowAll() {
         String sqlQuery = "Select id, text, votes_count FROM answer ";
-        List<Answer> answers = jdbcTemplate.query(sqlQuery,new AnswerRowMapper());
+        List<Answer> answers = jdbcTemplate.query(sqlQuery, new AnswerRowMapper());
         return answers;
     }
 }
