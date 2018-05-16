@@ -36,17 +36,6 @@
 <head>
     <style>
         html,
-
-        <
-        link href
-
-        =
-        "https://fonts.googleapis.com/css?family=Oswald"
-        rel
-
-        =
-        "stylesheet"
-        >
         body {
             font-family: 'Oswald', sans-serif;
         }
@@ -54,11 +43,15 @@
         .profile {
             min-height: 355px;
             display: inline-block;
+            font-family: 'Lobster', cursive;
+            font-size: 20px;
+            margin-left: 30px;
         }
 
         .goodbutton {
             display: inline-block;
             margin-right: auto;
+            font-family: 'Lobster', cursive;
             font-size: 24px;
         }
     </style>
@@ -69,26 +62,20 @@
 <body>
 <form action="/create" method="POST">
     <#list user_profile as user>
-     <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-        <div class="row">
-            <div class="col-md-offset-2 col-md-8 col-lg-offset-3 col-lg-6">
-                <div class="well profile">
-                    <div class="col-sm-12">
-                        <div class="col-xs-12 col-sm-8">
-                            <p>Ващ id</p>
-                          <p>${user.id}</p>
-                            <p>username:</p>
-                            <input type="text" name="username" id="username" value="${user.username}"> <br>
-                            <p><strong>firstname: </strong></p>
-                            <input type = "text" name = "firstname" id = "firstname" value="${user.firstname}"> <br>
-                            <p><strong> secondname</strong> </p>
-                            <input type = "text" name = "secondname" id = "secondname" value="${user.secondname}"> <br>
-                            <div class="goodbutton">
-                                <input type="submit" value="изменить профиль">
-                            </div>
-                        </div>
-                    </div>
-                </div>
+        <link href="https://fonts.googleapis.com/css?family=Lobster" rel="stylesheet">
+
+        <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+        <div class="well profile">
+            <p><strong>Ваш id</strong></p>
+            <p>${user.id}</p>
+            <p><strong>username:</strong></p>
+            <input type="text" name="username" id="username" value="${user.username}"> <br>
+            <p><strong>firstname: </strong></p>
+            <input type="text" name="firstname" id="firstname" value="${user.firstname}"> <br>
+            <p><strong> secondname:</strong></p>
+            <input type="text" name="secondname" id="secondname" value="${user.secondname}"> <br>
+            <div class="goodbutton">
+                <input type="submit" value="изменить профиль">
             </div>
         </div>
     </#list>
