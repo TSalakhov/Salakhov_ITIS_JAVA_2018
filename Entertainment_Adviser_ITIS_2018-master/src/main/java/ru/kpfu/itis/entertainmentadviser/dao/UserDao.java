@@ -12,4 +12,5 @@ public interface UserDao {
     List<User> allUsers(Long id);
     List<User> addFriend(Long id,Long id2);
     List<User> MyFriends(Long id);
+    Boolean isChosenByUser(Long id,Long id2);
 }

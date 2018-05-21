@@ -4,21 +4,28 @@
 </head>
 <body>
 <#include "menu.ftl">
-<div class="container">
-<#list AllUsers as user >
-    <div class="row">
-        <div class="col-1">Username:</div>
-        <div class="col-11"><p> ${user.username} </p></div>
-    </div>
-    <div class="row">
-        <div class="col-1">Firstname:</div>
-        <div class="col-11"> <p> <a href="/user/${user.id}">${user.firstname}</a> </p></div>
-    </div>
-    <div class="row">
-        <div class="col-1">Secondname:</div>
-        <div class="col-11"><p> <a href="/user/${user.id}"> ${user.secondname}</a></p></div>
-    </div>
-</#list>
-</div>
+<table class="table table-striped table-dark table-bordered table-hover">
+    <thead>
+    <tr>
+        <th>#</th>
+        <th>username</th>
+        <th>firstname</th>
+        <th>Secondname</th>
+    </tr>
+    </thead>
+    <tbody>
+     <#list AllUsers as user>
+     <tr>
+         <th scope="row">${user.id}</th>
+         <td><a href="/user/${user.id}"
+             <button type="button" class="btn btn-secondary"> ${user.username}</button> </a></td>
+         <td>${user.firstname}</td>
+         <td>${user.secondname}</td>
+     </tr>
+     </#list>
+    </tbody>
+</table>
+
+
 </body>
 </html>

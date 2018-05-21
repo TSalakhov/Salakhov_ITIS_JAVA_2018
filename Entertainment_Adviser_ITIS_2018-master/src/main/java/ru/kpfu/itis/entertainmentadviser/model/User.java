@@ -7,8 +7,20 @@ public class User {
     private String firstname;
     private String secondname;
     private String role;
+    private Boolean isChosen;
 
     public User() {
+    }
+
+
+
+
+    public Boolean getChosen() {
+        return isChosen;
+    }
+
+    public void setChosen(Boolean chosen) {
+        isChosen = chosen;
     }
 
     public Long getId() {

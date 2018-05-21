@@ -25,9 +25,32 @@ public class ProfileController {
 
 
     @GetMapping("/user/{id}")
-    String showProfile(Model model, @PathVariable Long id) {
-        List<User> user_profile = userDao.showProfile(id);
-        model.addAttribute("user_profile", user_profile);
+    String showProfile(Model model, Authentication authentication, @PathVariable Long id) {
+        CurrentUser currentUser = (CurrentUser) authentication.getPrincipal();
+        User mainUser = currentUser.getUser();
+        Long MainId = mainUser.getId();
+        User user2 = userDao.findById(id);
+        String username = user2.getUsername();
+        List<User> oldUserFriend = userDao.MyFriends(MainId);
+        for (User userFriend : oldUserFriend) {
+                if (userDao.isChosenByUser(MainId, id)) {
+                    List<User> user_profile = userDao.showProfile(id);
+                    model.addAttribute("user_profile", user_profile);
+                    return "simpleProfile";
+
+            } else {
+                    List<User> user_profile = userDao.showProfile(id);
+                    model.addAttribute("user_profile", user_profile);
+                    return "profile";
+
+            }
+
+        }
+        if(oldUserFriend.size()==0){
+            List<User> user_profile = userDao.showProfile(id);
+            model.addAttribute("user_profile", user_profile);
+            return "profile";
+        }
         return "profile";
     }
 
@@ -51,12 +74,24 @@ public class ProfileController {
     }
 
     @PostMapping("/add")
-    String addFriend(Authentication authentication, @PathVariable Long id2) {
+    String addFriend(Authentication authentication, @RequestParam String username) {
         CurrentUser currentUser = (CurrentUser) authentication.getPrincipal();
         User mainUser = currentUser.getUser();
         Long id = mainUser.getId();
-        userDao.addFriend(id, id2);
-        return "redirect:/";
+        User user = userDao.findByUsername(username);
+        List<User> oldUserFriend = userDao.MyFriends(id);
+        Long id2 = user.getId();
+        for (User userFriend : oldUserFriend) {
+                if (userDao.isChosenByUser(id, id2)) {
+
+            } else {
+                    userDao.addFriend(id, id2);
+            }
+        }
+        if(oldUserFriend.size()==0) {
+            userDao.addFriend(id, id2);
+        }
+        return "redirect:/users" ;
     }
 
     @GetMapping("/MyFriend")
@@ -68,5 +103,4 @@ public class ProfileController {
         model.addAttribute("MyFriend", MyFriend);
         return "MyFriend";
     }
-
 }

@@ -36,7 +36,7 @@ public class TagController {
         for (UserTag userTag : oldUserTagList) {
             if (userTagIds.contains(userTag.getId())) {
                 //пользователь выбрал, но до этого выбран не был
-                if (!userTag.getChosen()) {
+                if (userTag.getChosen()) {
                     userTagService.addTagToUser(user, userTag);
                 }
             } else {

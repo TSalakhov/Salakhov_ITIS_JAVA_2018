@@ -23,7 +23,11 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public User findById(Long id) {
-        return null;
+        String sqlQuery = "SELECT * FROM users WHERE id = :id";
+        Map namedParameters = new HashMap();
+        namedParameters.put("id", id);
+        User user = namedParameterJdbcTemplate.queryForObject(sqlQuery, namedParameters, userRowMapper);
+        return user;
     }
 
     @Override
@@ -61,14 +65,14 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public List<User> allUsers(Long id) {
-        String sqlQuery = "SELECT * FROM users ";
+        String sqlQuery = "SELECT * FROM users ORDER BY id";
         List<User> AllUsers = jdbcTemplate.query(sqlQuery, userRowMapper);
         return AllUsers;
     }
 
     @Override
     public List<User> addFriend(Long id, Long id2) {
-        String sqlQuery = "INSERT INTO user_friend VALUE (user_id = :id,friend_id = :id2)";
+        String sqlQuery = "INSERT INTO user_friend (user_id,friend_id) VALUES (:id , :id2)";
         Map namedParametrs = new HashMap();
         namedParametrs.put("id", id);
         namedParametrs.put("id2", id2);
@@ -78,11 +82,21 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public List<User> MyFriends(Long id) {
-        String sqlQuery = "SELECT friend.* FROM users friend, user_friend uf WHERE uf.user_id = :user_id AND uf.friend_id = friend.id;";
+        String sqlQuery = "SELECT friend.* FROM users friend, user_friend uf WHERE uf.user_id = :user_id AND uf.friend_id = friend.id ORDER BY id";
         Map namedParametrs = new HashMap();
         namedParametrs.put("user_id", id);
         List<User> user_friend = namedParameterJdbcTemplate.query(sqlQuery, namedParametrs, userRowMapper);
         return user_friend;
+    }
+
+    @Override
+    public Boolean isChosenByUser(Long id, Long id2) {
+        String sqlQuery = "SELECT EXISTS(SELECT * FROM user_friend uf WHERE uf.user_id = :userId AND uf.friend_id = :friendId)";
+        Map namedParametrs = new HashMap();
+        namedParametrs.put("userId",id);
+        namedParametrs.put("friendId",id2);
+        Boolean isChoosen = namedParameterJdbcTemplate.queryForObject(sqlQuery, namedParametrs, Boolean.class);
+        return isChoosen;
     }
 
 }
